@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <script>
+      CUR_SLIDE = 0
+      function addSlide(name, text, imgsrc, attrib1, attrib2, attrib3, attrib4, attrib5 ) {
+      document.all.output.innerHTML += "slides[" + CUR_SLIDE 
+	  document.all.output.innerHTML += "]=new Slide(\""+ name
+	  document.all.output.innerHTML += "\", \"" +  text
+	  document.all.output.innerHTML += "\", \"" + imgsrc 
+	  document.all.output.innerHTML += "\", new Array( " + attrib1
+	  document.all.output.innerHTML += "," + attrib2
+	  document.all.output.innerHTML += "," + attrib3
+	  document.all.output.innerHTML += "," + attrib4
+	  document.all.output.innerHTML += "," + attrib5
+	  document.all.output.innerHTML += "))<br>" 
+	  CUR_SLIDE++
+      }
+    </script>
+  </head>
+  <body onload="document.all.name.focus()">
+<!--        // slides[i]=new slide(Name, text, imgsrc, new Array(, , , , , ))-->
+    <table>
+      <tr>
+        <td>Name</td><td><input type="text" id="name" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Comentary</td><td><textarea size = 3 id="comment" onfocus="this.select()"></textarea></td>
+      </tr>
+      <tr>
+        <td>Image Source File</td><td><input type="file" id="imgsrc" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Attribute1</td><td><input type="text" id="attrib1" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Attribute2</td><td><input type="text" id="attrib2" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Attribute3</td><td><input type="text" id="attrib3" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Attribute4</td><td><input type="text" id="attrib4" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td>Attribute5</td><td><input type="text" id="attrib5" onfocus="this.select()"></td>
+      </tr>
+      <tr>
+        <td colspan = 2><input type="button" value="Add Line" onclick="addSlide(document.all.name.value, comment.value, imgsrc.value, attrib1.value, attrib2.value, attrib3.value, attrib4.value, attrib5.value ); document.all.name.focus(); "></td>
+      </tr>
+
+    </table>
+    <div id="output"></div>
+  </body>
+</html>

@@ -1,0 +1,151 @@
+body {
+	padding:0;
+	margin:0;
+     }
+
+.container {
+     visibility: hidden;
+	 display:none;
+	 position: absolute;
+     width:80%;
+     height:403;
+     left:10%;
+     top:108;
+	 
+	 background-image: url(img/slide_bg.gif);
+	 background-repeat:no-repeat;
+	 background-position: center center;
+     padding: 0;
+	 margin: 0;
+     text-align:center;
+     }
+
+.container table {
+	 width: 590;
+	 height: 328;
+
+}
+.container td {
+   vertical-align:top;
+}
+ 
+.container table tr td table {
+
+	 height: 0%;
+     width: 100%;
+}
+.container table tr td table tr td{
+	 text-align: center;
+	 	 border: 0px;
+}
+
+.leftpane {
+	text-align: justify;
+	padding-right: 10px;
+	overflow: hidden;
+	height:328;
+}
+.centerpane {
+}
+.rightpane {
+}
+.name {
+     visibility: visible; 
+     display: block; 
+     font-size:14pt;
+	 font-style:normal;
+	 font-family: arial;
+	 color:#1c2da5;
+	 font-weight:bold;
+	 text-align: left;
+	 border-bottom: #1c2da5 solid 1px;
+}
+
+.text {
+	height:250px;
+/*	overflow:auto;*/
+	font-style: italic;
+	font-size:10pt;
+
+}
+.attrib {
+	cursor: hand;
+	font-weight:bold;
+	font-family:"Arial,Helvetica,Geneva,Swiss,SunSans-Regular";
+	color:#251d00;
+	font-size: 10pt;
+
+	}
+.attribimg {
+	margin-top:7px;
+	margin-bottom:7px;
+}
+
+#sortedSearchBar {
+     position:absolute;
+	 width:100%;
+	 left:0;
+	 top:426;
+	 text-align:center;
+}
+
+#sortedSearchBar IMG {
+	 cursor: hand;
+	 }
+
+
+#curSortedAttribute {
+	 font-family: "arial Black";
+	 color:#251d00;
+     font-size: 18pt; 
+
+}
+
+	}
+
+#linkbar {
+	position:absolute;
+	top:41;
+	left: 0;
+	width: 100%;
+	height: 18;
+	padding:0;
+	text-align:center;
+    background-color:#1c2daf;
+}
+#linkbar table{
+	width:590;
+	border:0;
+	text-align: center;
+
+}
+#linkbar td{
+	text-align:center;
+	width:20%;
+/*	height: 250px; */
+	font-family: arial;
+/*	border: #f0cf74 solid 3px;*/
+}
+#linkbar a{
+	color: #f0cf74;
+	font-weight:bold;
+	text-decoration:none;
+}
+#scclogo {
+	position:absolute;
+	top:0;
+	left: 10%;
+	
+}
+#credits {
+     position:absolute;
+     width: 100%;
+     top: 501;
+     text-align:center;
+	 font-family:arial;
+
+     border-top:#1c2da5 solid 3px;
+}
+#credits td {
+	 font-size:10pt;
+}

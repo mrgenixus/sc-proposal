@@ -1,0 +1,22 @@
+	    var n, w;
+	    n = INDEX.length
+		w = (530 / n) - 2  
+        if ( w > 10 ) {
+		  w = 10;
+		}
+
+	    document.open()
+		document.writeln("<Div id=\"CurSortedAttribute\"> Loaded </div>")
+		document.writeln("<img src=\"" + PREV_IMG_SRC + "\" onclick=\"prevFrame()\">")
+		for ( var n=0; n < INDEX.length; n++) {
+          if (n == 0) {
+            document.writeln('<img id = "bar' + n + '"src = "'+ SELECTED +'" width=' + w + ' height="24" onclick="chCurrentFrameTo(' + n + ')">')
+			chCurrentFrameTo(n)
+          }
+          else {
+		    document.writeln('<img id = "bar' + n + '"src = "' + NOTSELECTED + '" width=' + w + ' height="24" onclick="chCurrentFrameTo(' + n + ')" >')
+		  }
+        }
+		document.writeln("<img src=\"" + NEXT_IMG_SRC + "\" onclick=\"nextFrame()\">")
+		document.close()
+		chSortField(0)

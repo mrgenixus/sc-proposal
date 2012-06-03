@@ -1,0 +1,37 @@
+  //database
+    function sort(byField, dir) {
+	  //bubblesort (ascending values)
+	  for ( var i = 0; i < INDEX.length - 1; i++) {
+	    for (var j = (i + 1) ; j < INDEX.length ; j++ ) {
+		  if (dir == "a" || dir == "A") {
+		    if (slides[INDEX[i]].baseData.attribs[byField] > slides[INDEX[j]].baseData.attribs[byField] ) {
+		      temp = INDEX[i]
+			  INDEX[i] = INDEX[j]
+			  INDEX[j] = temp
+			}
+
+		  }
+		}
+	  }
+	  //binary tree
+	  /*
+	  */
+	}
+	
+	function chSortField(newField) {
+	  currentSlide = slides[INDEX[CUR_INDEX]]
+	  currentButton = document.getElementById("bar" + CUR_INDEX)
+	  currentButton.src = NOTSELECTED
+	  sort(newField, SORT_DIR)
+	  for ( var i = 0; i < INDEX.length; i++ ){
+	    if (currentSlide == slides[INDEX[i]]) {
+		  CUR_INDEX = i;
+		  currentButton = document.getElementById("bar" + CUR_INDEX)
+		  currentButton.src = SELECTED
+		}
+	  }
+	  label = document.getElementById("CurSortedAttribute")
+	  stock1 = "Organized by increasing: "
+	  label.innerHTML = stock1 + ATTRIBUTE_NAMES[newField]
+	  
+	}

@@ -1,0 +1,37 @@
+  //Objects
+  function CoffeeFrame(BaseData) {
+
+    this.container				= document.createElement('DIV')
+    this.container.className	= 'container'
+	notHTML		=  "<table align=\"center\" >"
+	notHTML		+= "  <tr>"
+	notHTML		+= "    <td class=\"leftpane rightmargin\" width=\"180\">"
+	notHTML		+= "        <DIV class=\"name\">" + BaseData.Name + "</DIV>"
+	notHTML		+= "        <DIV class=\"text\">" + BaseData.text + "</DIV>"
+	notHTML		+= "    </td>"
+	notHTML		+= "    <td class=\"centerpane\" align=\"center\" >"
+	notHTML		+= "      <img src=\"" + BaseData.imgSrc + "\" class=\"image\">"
+	notHTML		+= "    </td>"
+    notHTML		+= "    <td class=\"rightpane\" >"
+	notHTML		+= "      <table border=\"0\" "
+	notHTML		+= "             cellspacing=\"0\" cellpadding=\"0\">"
+	for (var i = 0; i < BaseData.attribs.length; i++){
+	  notHTML	+= "        <tr >"
+	  notHTML  	+= "          <td class=\"attrib\" onclick=\"chSortField(" + i + ")\" valign=\"center\">"
+	  notHTML	+=              ATTRIBUTE_NAMES[i]
+      notHTML  	+= "            <img src=\""+ BASE_IMAGE_NAME + BaseData.attribs[i] + ".gif\""
+      notHTML   += "                 alt=\"\" class=\"attribimg\""
+	  notHTML	+= "                 height=\"15\" width=\"180\" border=\"0\">"
+	  notHTML	+= "          </td>"
+	  notHTML	+= "        </tr>"
+    }
+	notHTML		+= "      </table>"
+	notHTML		+= "    </td>"
+	notHTML		+= "  </tr>"
+	notHTML		+= "</table>"
+   this.container.innerHTML = notHTML
+	a = document.getElementById("slideShowAnchor")
+    a.appendChild(this.container)
+	
+    return this
+  }

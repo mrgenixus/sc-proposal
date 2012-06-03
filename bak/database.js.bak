@@ -1,0 +1,19 @@
+  //database
+    function sort(byField, dir) {
+	  //bubblesort (ascending values)
+	  for ( var i = 0; i < INDEX.length - 1; i++) {
+	    for (var j = (i + 1) ; j < INDEX.length ; j++ ) {
+		  if (dir == "a" || dir == "A") {
+		    if (slides[INDEX[i]].baseData.attribs[byField] > slides[INDEX[j]].baseData.attribs[byField] ) {
+		      temp = INDEX[i]
+			  INDEX[i] = INDEX[j]
+			  INDEX[j] = temp
+			}
+
+		  }
+		}
+	  }
+	  //binary tree
+	  /*
+	  */
+	}

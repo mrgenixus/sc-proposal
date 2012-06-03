@@ -1,0 +1,228 @@
+<html>
+  <head>
+    <title>Base Document Template</title>
+  <style>
+
+  @import url("frame.css");
+  </style>
+  <script>
+  <!--
+  //Setup
+  var DEBUG = 1
+  //Index-Related Globals
+  var INDEX = new Array()
+  var CUR_INDEX = 0
+  //Sort-Related Globals
+  var SORT_DIR = "a"
+  var CUR_SORTED_ATTRIBUTE = 0
+  //Dimensions and unknowns
+  var COFFEE_IMAGE_WIDTH = 40			//Big Image Width
+  var COFFEE_IMAGE_HEIGHT = 70			//Big Image Height
+  var ATTRIBUTE_NAMES = new Array()		//see below
+  /* put PHP code here to handle inputting arrtibute Names
+  (i.e.
+    ATTRIBUTE_NAMES[0]="Depth of Roast"
+  )
+  */
+    ATTRIBUTE_NAMES[0]="ACIDITY"
+	ATTRIBUTE_NAMES[1]="BITTERNESS"
+    ATTRIBUTE_NAMES[2]="ORGANICS"
+	ATTRIBUTE_NAMES[3]="ROAST"
+	ATTRIBUTE_NAMES[4]="COMPLEXITY"
+
+  var NOTSELECTED = "img/button.gif"		//source of unselected index button
+  var SELECTED = "img/button_selected.gif"	//source of selected index button
+
+  var BASE_IMAGE_NAME/*(for attributes)*/ = "img/slide-"  
+  var IMAGE_EXT = ".gif"
+  var NEXT_IMG_SRC = "img/next.gif"					//Next button src
+  var PREV_IMG_SRC = "img/prev.gif"					//Previous button src
+
+  //Objects
+  function CoffeeFrame(BaseData) {
+
+    this.container				= document.createElement('DIV')
+    this.container.className	= 'container'
+	notHTML		=  "<table align=\"center\" >"
+	notHTML		+= "  <tr>"
+	notHTML		+= "    <td class=\"leftpane rightmargin\" width=\"180\">"
+	notHTML		+= "        <DIV class=\"name\">" + BaseData.Name + "</DIV>"
+	notHTML		+= "        <DIV class=\"text\">" + BaseData.text + "</DIV>"
+	notHTML		+= "    </td>"
+	notHTML		+= "    <td class=\"centerpane\" align=\"center\" >"
+	notHTML		+= "      <img src=\"" + BaseData.imgSrc + "\" class=\"image\">"
+	notHTML		+= "    </td>"
+    notHTML		+= "    <td class=\"rightpane\" >"
+	notHTML		+= "      <table border=\"0\" "
+	notHTML		+= "             cellspacing=\"0\" cellpadding=\"0\">"
+	for (var i = 0; i < BaseData.attribs.length; i++){
+	  notHTML	+= "        <tr >"
+	  notHTML  	+= "          <td class=\"attrib\" onclick=\"chSortField(" + i + ")\" valign=\"center\">"
+	  notHTML	+=              ATTRIBUTE_NAMES[i]
+      notHTML  	+= "            <img src=\""+ BASE_IMAGE_NAME + BaseData.attribs[i] + ".gif\""
+      notHTML   += "                 alt=\"\" class=\"attribimg\""
+	  notHTML	+= "                 height=\"15\" width=\"180\" border=\"0\">"
+	  notHTML	+= "          </td>"
+	  notHTML	+= "        </tr>"
+    }
+	notHTML		+= "      </table>"
+	notHTML		+= "    </td>"
+	notHTML		+= "  </tr>"
+	notHTML		+= "</table>"
+   this.container.innerHTML = notHTML
+	a = document.getElementById("slideShowAnchor")
+    a.appendChild(this.container)
+	
+    return this
+  }
+
+
+
+  function Slide(name, text, imgsrc, attribs){
+    this.baseData = new Array()
+    this.baseData.Name = name
+    this.baseData.text = text
+    this.baseData.imgSrc = imgsrc
+    this.baseData.attribs = new Array()
+    this.baseData.attribs = attribs 
+    this.HTML = new CoffeeFrame(this.baseData)
+    INDEX[INDEX.length] = INDEX.length
+    return this
+
+  }
+
+
+ 
+
+  //Utility Functions
+  
+    //database
+    function sort(byField, dir) {
+	  //bubblesort (ascending values)
+	  for ( var i = 0; i < INDEX.length - 1; i++) {
+	    for (var j = (i + 1) ; j < INDEX.length ; j++ ) {
+		  if (dir == "a" || dir == "A") {
+		    if (slides[INDEX[i]].baseData.attribs[byField] > slides[INDEX[j]].baseData.attribs[byField] ) {
+		      temp = INDEX[i]
+			  INDEX[i] = INDEX[j]
+			  INDEX[j] = temp
+			}
+
+		  }
+		}
+	  }
+	  //binary tree
+	  /*
+	  */
+	}
+
+    //
+  //Navigation Functions
+    function chCurrentFrameTo(newIndex) {
+	  old = CUR_INDEX
+	  CUR_INDEX = newIndex
+	  slides[INDEX[old]].HTML.container.style.display = "none"
+	  slides[INDEX[old]].HTML.container.style.visibility = "hidden"
+      
+	  slides[INDEX[newIndex]].HTML.container.style.display = "inline"
+  	  slides[INDEX[newIndex]].HTML.container.style.visibility = "visible"
+	 
+	  selectedOnBar = document.getElementById("bar" + old)
+	  selectedOnBar.src = NOTSELECTED
+      selectedOnBar = document.getElementById("bar" + newIndex)
+	  selectedOnBar.src = SELECTED
+
+	}
+
+	function prevFrame() {
+	  if ( CUR_INDEX > 0 ) {
+	    chCurrentFrameTo(CUR_INDEX - 1)
+	  }
+	  return false;
+	}
+
+	function nextFrame() {
+	  if ( CUR_INDEX  < INDEX.length-1 ) {
+	    chCurrentFrameTo(CUR_INDEX + 1)
+	  }
+	  return false;
+	}
+
+	function chSortField(newField) {
+	  currentSlide = slides[INDEX[CUR_INDEX]]
+	  currentButton = document.getElementById("bar" + CUR_INDEX)
+	  currentButton.src = NOTSELECTED
+	  sort(newField, SORT_DIR)
+	  for ( var i = 0; i < INDEX.length; i++ ){
+	    if (currentSlide == slides[INDEX[i]]) {
+		  CUR_INDEX = i;
+		  currentButton = document.getElementById("bar" + CUR_INDEX)
+		  currentButton.src = SELECTED
+		}
+	  }
+	  label = document.getElementById("CurSortedAttribute")
+	  label.innerHTML = ATTRIBUTE_NAMES[newField]
+	  
+	}
+  //-->
+  </script>
+  </head>
+  <body>
+    <div id="slideShowAnchor">
+
+    </div>
+
+	<div>
+	  <script>
+        //<<PHP here>>
+        // slides[i]=new slide(Name, text, imgsrc, new Array(, , , , , ))
+       //test data
+       var slides = new Array()
+slides[	0	]=new Slide("Cafe Bravo", "They are the people who plant the seeds, They are the people who grow the trees, They pick the beans with tender care, And send them off, they know not where. The coffee you hold has traveled far, From a land where life is very hard, Where children go to work so young, Where families struggle all life long. They are farmers and workers born to the earth, The course of their lives determined at birth, They are proud, but humble.", "./img/logo_cafe-bravo.gif", new Array( 1,3,5,7,9))
+slides[	1	]=new Slide("Cafe Timor", "They are the people who plant the seeds, They are the people who grow the trees, They pick the beans with tender care, And send them off, they know not where. The coffee you hold has traveled far, From a land where life is very hard, Where children go to work so young, Where families struggle all life long. They are farmers and workers born to the earth, The course of their lives determined at birth, They are proud, but humble.", "./img/logo_cafe-timor.gif", new Array( 2,4,6,8,10))
+slides[	2	]=new Slide("Cafe de Guatemala", "They are the people who plant the seeds, They are the people who grow the trees, They pick the beans with tender care, And send them off, they know not where. The coffee you hold has traveled far, From a land where life is very hard, Where children go to work so young, Where families struggle all life long. They are farmers and workers born to the earth, The course of their lives determined at birth, They are proud, but humble.", "./img/logo_cafe-guatemala.gif", new Array( 1,1,2,3,5))
+slides[	3	]=new Slide("Cafe de Corazon", "They are the people who plant the seeds, They are the people who grow the trees, They pick the beans with tender care, And send them off, they know not where. The coffee you hold has traveled far, From a land where life is very hard, Where children go to work so young, Where families struggle all life long. They are farmers and workers born to the earth, The course of their lives determined at birth, They are proud, but humble.", "./img/logo_cafe-corazon.gif", new Array( 8,2,1,3,4))
+slides[	4	]=new Slide("Cafe Precioso (Decaf)", "They are the people who plant the seeds, They are the people who grow the trees, They pick the beans with tender care, And send them off, they know not where. The coffee you hold has traveled far, From a land where life is very hard, Where children go to work so young, Where families struggle all life long. They are farmers and workers born to the earth, The course of their lives determined at birth, They are proud, but humble.", "./img/logo_cafe-preciosa.gif", new Array( 3,1,4,1,6))	  
+      </script>
+	</div>
+    <div id="sortedSearchBar">
+      <script>
+	    var n, w;
+	    n = INDEX.length
+		w = (530 / n) - 2  
+        if ( w > 10 ) {
+		  w = 10;
+		}
+
+	    document.open()
+		document.writeln("<Div id=\"CurSortedAttribute\"> Loaded </div>")
+		document.writeln("<img src=\"" + PREV_IMG_SRC + "\" onclick=\"prevFrame()\">")
+		for ( var n=0; n < INDEX.length; n++) {
+          if (n == 0) {
+            document.writeln('<img id = "bar' + n + '"src = "'+ SELECTED +'" width=' + w + ' height="24" onclick="chCurrentFrameTo(' + n + ')">')
+			chCurrentFrameTo(n)
+          }
+          else {
+		    document.writeln('<img id = "bar' + n + '"src = "' + NOTSELECTED + '" width=' + w + ' height="24" onclick="chCurrentFrameTo(' + n + ')" >')
+		  }
+        }
+		document.writeln("<img src=\"" + NEXT_IMG_SRC + "\" onclick=\"nextFrame()\">")
+		document.close()
+		chSortField(0)
+      </script>
+    </div>
+
+	<div id="linkbar">
+	  <table align="center">
+	    <tr>
+		  <td>&nbsp;</td>	
+		  <td><a href="javascript:alert('link2')">COFFEES</a></td>
+		  <td><a href="javascript:alert('link3')">PHILOSOPHY</a></td>
+		  <td><a href="javascript:alert('link4')">COMPANY</a></td>
+  		  <td><a href="javascript:alert('link4')">CONTACT US</a></td>
+		</tr>
+	  </table>
+	</div>
+    <img id="scclogo" src="img/scc_diamond.gif">
+  </body>
+</html>

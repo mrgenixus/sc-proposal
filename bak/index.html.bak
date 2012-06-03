@@ -1,0 +1,120 @@
+<html>
+  <head>
+    <title>Base Document Template</title>
+  <style>
+
+  @import url("frame.css");
+  </style>
+  <script src="globals.js">
+  </script>
+  <script src="coffeeframe.js">
+  </script>
+  <script src="slide.js">
+  </script>
+  <script src="utility.js">
+  <script>
+  <!--
+  
+
+
+ 
+
+  //Utility Functions
+  
+    //database
+    function sort(byField, dir) {
+	  //bubblesort (ascending values)
+	  for ( var i = 0; i < INDEX.length - 1; i++) {
+	    for (var j = (i + 1) ; j < INDEX.length ; j++ ) {
+		  if (dir == "a" || dir == "A") {
+		    if (slides[INDEX[i]].baseData.attribs[byField] > slides[INDEX[j]].baseData.attribs[byField] ) {
+		      temp = INDEX[i]
+			  INDEX[i] = INDEX[j]
+			  INDEX[j] = temp
+			}
+
+		  }
+		}
+	  }
+	  //binary tree
+	  /*
+	  */
+	}
+
+    //
+  //Navigation Functions
+    function chCurrentFrameTo(newIndex) {
+	  old = CUR_INDEX
+	  CUR_INDEX = newIndex
+	  slides[INDEX[old]].HTML.container.style.display = "none"
+	  slides[INDEX[old]].HTML.container.style.visibility = "hidden"
+      
+	  slides[INDEX[newIndex]].HTML.container.style.display = "inline"
+  	  slides[INDEX[newIndex]].HTML.container.style.visibility = "visible"
+	 
+	  selectedOnBar = document.getElementById("bar" + old)
+	  selectedOnBar.src = NOTSELECTED
+      selectedOnBar = document.getElementById("bar" + newIndex)
+	  selectedOnBar.src = SELECTED
+
+	}
+
+	function prevFrame() {
+	  if ( CUR_INDEX > 0 ) {
+	    chCurrentFrameTo(CUR_INDEX - 1)
+	  }
+	  return false;
+	}
+
+	function nextFrame() {
+	  if ( CUR_INDEX  < INDEX.length-1 ) {
+	    chCurrentFrameTo(CUR_INDEX + 1)
+	  }
+	  return false;
+	}
+
+	function chSortField(newField) {
+	  currentSlide = slides[INDEX[CUR_INDEX]]
+	  currentButton = document.getElementById("bar" + CUR_INDEX)
+	  currentButton.src = NOTSELECTED
+	  sort(newField, SORT_DIR)
+	  for ( var i = 0; i < INDEX.length; i++ ){
+	    if (currentSlide == slides[INDEX[i]]) {
+		  CUR_INDEX = i;
+		  currentButton = document.getElementById("bar" + CUR_INDEX)
+		  currentButton.src = SELECTED
+		}
+	  }
+	  label = document.getElementById("CurSortedAttribute")
+	  stock1 = "Organized by increasing: "
+	  label.innerHTML = stock1 + ATTRIBUTE_NAMES[newField]
+	  
+	}
+  //-->
+  </script>
+  </head>
+  <body>
+    <div id="slideShowAnchor">
+    </div>
+	<div>
+	  <script src ="input.js">
+      </script>
+	</div>
+    <div id="sortedSearchBar">
+      <script src="sortbar.js">
+      </script>
+    </div>
+	<div id="linkbar">
+	  <table align="center">
+	    <tr>
+		  <td>&nbsp;</td>	
+		  <td><a href="javascript:alert('Coffees!')">COFFEES</a></td>
+		  <td><a href="javascript:alert('Philosophy!')">PHILOSOPHY</a></td>
+		  <td><a href="javascript:alert('Company!')">COMPANY</a></td>
+  		  <td><a href="javascript:alert('Contact Us!')">CONTACT US</a></td>
+		</tr>
+	  </table>
+	</div>
+    <img id="scclogo" src="img/scc_diamond.gif">
+  </body>
+</html>

@@ -1,0 +1,30 @@
+//Navigation Functions
+    function chCurrentFrameTo(newIndex) {
+	  old = CUR_INDEX
+	  CUR_INDEX = newIndex
+	  slides[INDEX[old]].HTML.container.style.display = "none"
+	  slides[INDEX[old]].HTML.container.style.visibility = "hidden"
+      
+	  slides[INDEX[newIndex]].HTML.container.style.display = "inline"
+  	  slides[INDEX[newIndex]].HTML.container.style.visibility = "visible"
+	 
+	  selectedOnBar = document.getElementById("bar" + old)
+	  selectedOnBar.src = NOTSELECTED
+      selectedOnBar = document.getElementById("bar" + newIndex)
+	  selectedOnBar.src = SELECTED
+
+	}
+
+	function prevFrame() {
+	  if ( CUR_INDEX > 0 ) {
+	    chCurrentFrameTo(CUR_INDEX - 1)
+	  }
+	  return false;
+	}
+
+	function nextFrame() {
+	  if ( CUR_INDEX  < INDEX.length-1 ) {
+	    chCurrentFrameTo(CUR_INDEX + 1)
+	  }
+	  return false;
+	}

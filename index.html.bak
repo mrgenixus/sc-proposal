@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Base Document Template</title>
+  <style>
+
+  @import url("frame.css");
+  </style>
+  <script src="scripts/globals.js">
+  </script>
+  <script src="scripts/coffeeframe.js">
+  </script>
+  <script src="scripts/slide.js">
+  </script>
+  <script src="scripts/database.js">
+  </script>
+  <script src="scripts/nav.js"></script>
+    </head>
+  <body>
+    <div id="slideShowAnchor">
+    </div>
+	<div>
+	  <script src ="scripts/input.js">
+      </script>
+	</div>
+    <div id="sortedSearchBar">
+      <script src="scripts/sortbar.js">
+      </script>
+    </div>
+	<div id="linkbar">
+	  <table align="center">
+	    <tr>
+		  <td>&nbsp;</td>	
+		  <td><a href="javascript:alert('Coffees!')">COFFEES</a></td>
+		  <td><a href="javascript:alert('Philosophy!')">PHILOSOPHY</a></td>
+		  <td><a href="javascript:alert('Company!')">COMPANY</a></td>
+  		  <td><a href="javascript:alert('Contact Us!')">CONTACT US</a></td>
+		</tr>
+	  </table>
+	</div>
+    <img id="scclogo" src="img/scc_diamond.gif">
+	<div id="credits"> 
+	  <TABLE>
+	  <TR>
+	  	<TD align="right" width="50%">Copyright (C) 2004 Dave Loftis<br>All Rights Reserved</TD>
+	  	<TD align="center" width="150"><img src=./img/lofdev.gif></TD>
+	  	<TD align="left" width="50%">	970.405.0110<br><a href="mailto:dave@lofdev.com">dave@lofdev.com</a></TD>
+	  </TR>
+	  </TABLE>
+	
+	
+
+	</div>
+  </body>
+</html>
